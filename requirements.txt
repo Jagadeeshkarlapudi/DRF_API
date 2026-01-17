@@ -1,1 +1,7 @@
-pip install gunicorn psycopg2-binary whitenoise dj-database-url django-cors-headers
+Django>=4.2
+djangorestframework
+gunicorn
+psycopg2-binary
+whitenoise
+dj-database-url
+django-cors-headers
