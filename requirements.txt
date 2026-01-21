@@ -1,9 +1,8 @@
-Django>=4.2
-djangorestframework
+Django
 gunicorn
 psycopg2-binary
-whitenoise
 dj-database-url
+whitenoise
 django-cors-headers
+djangorestframework
 djangorestframework-simplejwt
-django

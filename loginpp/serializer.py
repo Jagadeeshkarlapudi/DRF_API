@@ -1,7 +1,7 @@
 # serializers.py
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from .models import Enquiry
+from .models import Enquiry,OnlineEnquiry
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -26,3 +26,14 @@ class EnquirySerializer(serializers.ModelSerializer):
     class Meta:
         model = Enquiry
         fields = "__all__"
+
+
+class OnlineEnquirySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OnlineEnquiry
+        fields = "__all__"
+
+    def validate_phone(self, value):
+        if not value.isdigit() or len(value) != 10:
+            raise serializers.ValidationError("Phone number must be 10 digits")
+        return value

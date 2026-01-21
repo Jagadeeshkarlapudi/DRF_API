@@ -18,9 +18,13 @@ from django.contrib import admin
 from django.urls import path,include
 from loginpp import views
 from rest_framework.routers import DefaultRouter
+# from .views import ContactEnquiryAPIView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('api/admin/login/', views.admin_login),
-      path("api/", include("loginpp.urls")),
+    path('api/admin/login/', views.admin_login),
+    path("api/", include("loginpp.urls")),
+    
+   
 ]
