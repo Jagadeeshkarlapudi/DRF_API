@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'loginpp',
 ]
 
+# --------------------------------------------------
+# REST FRAMEWORK
+# --------------------------------------------------
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -50,12 +53,12 @@ REST_FRAMEWORK = {
 }
 
 # --------------------------------------------------
-# MIDDLEWARE (ORDER IS IMPORTANT)
+# MIDDLEWARE
 # --------------------------------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 
-    'corsheaders.middleware.CorsMiddleware',  # MUST be high
+    'corsheaders.middleware.CorsMiddleware',  # must be high
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -93,15 +96,27 @@ TEMPLATES = [
 ]
 
 # --------------------------------------------------
-# DATABASE (POSTGRES ON RENDER, SQLITE LOCALLY)
+# DATABASE CONFIGURATION
 # --------------------------------------------------
-DATABASES = {
-    "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-        ssl_require=True
-    )
-}
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    # Render / Production (PostgreSQL)
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True,
+        )
+    }
+else:
+    # Local development (SQLite)
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # --------------------------------------------------
 # PASSWORD VALIDATION
@@ -125,7 +140,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # INTERNATIONALIZATION
 # --------------------------------------------------
 LANGUAGE_CODE = 'en-us'
+
 TIME_ZONE = 'Asia/Kolkata'
+
 USE_I18N = True
 USE_TZ = True
 
@@ -136,6 +153,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # --------------------------------------------------
-# DEFAULT PK
+# DEFAULT PRIMARY KEY
 # --------------------------------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
