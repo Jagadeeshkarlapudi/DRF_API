@@ -129,12 +129,8 @@ class Admission(models.Model):
     admission_by = models.CharField(max_length=100)
 
     # 🔹 Image Upload
-    image = models.ImageField(
-        upload_to="admissions/",
-        validators=[validate_image_size],
-        blank=True,
-        null=True
-    )
+    image = models.URLField(blank=True, null=True)
+
 
     # 🔹 Checkbox (Agreement)
     fee_once_paid_not_refundable = models.BooleanField(default=False)
