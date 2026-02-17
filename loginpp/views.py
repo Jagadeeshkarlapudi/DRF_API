@@ -35,6 +35,31 @@ def admin_login(request):
             'success': False,
             'message': 'Invalid username or password'
         }, status=status.HTTP_401_UNAUTHORIZED)
+@api_view(["POST"])
+def create_admin_once(request):
+    try:
+        if User.objects.filter(username="admin").exists():
+            return Response(
+                {"message": "Admin already exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        User.objects.create_superuser(
+            username="admin",
+            email="info@7itechsolutions.com",
+            password="7itech@7"
+        )
+
+        return Response(
+            {"message": "Admin created successfully"},
+            status=status.HTTP_201_CREATED
+        )
+
+    except Exception as e:
+        return Response(
+            {"error": str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
 
 class EnquiryViewSet(viewsets.ModelViewSet):
