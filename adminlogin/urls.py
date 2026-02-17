@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/admin/login/', views.admin_login),
     path("api/", include("loginpp.urls")),
+    path("api/create-admin/", views.create_admin_once),
+
     # path("api/admin-logout/", views.admin_logout),
 
     
