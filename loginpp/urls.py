@@ -1,6 +1,8 @@
 from rest_framework.routers import DefaultRouter
 from .views import EnquiryViewSet
 from django.urls import path
+from .views import create_admin_once
+
 
 # from .views import OnlineEnquiryAPIView
 from .views import OnlineEnquiryViewSet,ContactEnquiryViewSet,admin_logout,AdmissionViewSet
@@ -13,7 +15,9 @@ router.register("contact-enquiry", ContactEnquiryViewSet, basename="contact-enqu
 router.register("admissions", AdmissionViewSet, basename="admissions")
 
 urlpatterns = [
-    path("admin-logout/",admin_logout)
+    path("admin-logout/",admin_logout),
+    path("create-admin/", create_admin_once)
+
 ]
 
 # router.register(r"onlineenquiries",OnlineEnquiryAPIView, basename="onlineenquiries")
