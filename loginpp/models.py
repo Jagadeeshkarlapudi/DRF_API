@@ -2,12 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 
 class Enquiry(models.Model):
-    STATUS_CHOICES = [
-        ('demo_pending', 'Joined'),
-        
-        
-        ('not_interested', 'Not Interested'),
-    ]
+  
     
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
@@ -26,11 +21,7 @@ class Enquiry(models.Model):
     demo_given_by = models.CharField(max_length=100)
 
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='No status'
-    )
+   
 
     def __str__(self):
         return self.name
