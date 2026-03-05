@@ -7,7 +7,7 @@ class Enquiry(models.Model):
     email = models.EmailField()
     passed_year = models.CharField(max_length=10)
     qualification = models.CharField(max_length=100)
-    college_name = models.CharField(max_length=150)
+    ocupation = models.CharField(max_length=150)
     address = models.TextField()
     course_interested = models.CharField(max_length=100)
 
