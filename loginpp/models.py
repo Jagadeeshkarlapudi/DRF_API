@@ -21,6 +21,15 @@ class Enquiry(models.Model):
     demo_given_by = models.CharField(max_length=100)
 
     created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(
+    max_length=50,
+    choices=[
+        ("joined", "Joined"),
+        ("not_interested", "Not Interested"),
+        ("pending", "Pending"),
+    ],
+    default="pending"
+)
    
 
     def __str__(self):
