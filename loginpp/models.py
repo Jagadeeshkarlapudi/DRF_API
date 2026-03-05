@@ -7,6 +7,7 @@ class Enquiry(models.Model):
         
         
         ('not_interested', 'Not Interested'),
+      ]
     
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
